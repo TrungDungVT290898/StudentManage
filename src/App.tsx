@@ -1,56 +1,37 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import logo from './logo.svg';
 import { Counter } from './features/counter/Counter';
 import './App.css';
-
+import cityAPI from './api/cityAPI';
+import studentAPI from './api/studentAPI';
+import { Route, Routes } from "react-router-dom"
+import LoginPage from './features/auth/pages/LoginPage';
+import AdminLayout from './components/Layout/Admin';
+import NotFound from './components/Common/NotFound';
+import PrivateRoute from './components/Common/PrivateRoute';
 function App() {
+  // useEffect(() => {
+  //   // cityAPI.getAll().then(data => console.log(data));
+  //   // studentAPI.getAll({ _page: 1, _limit: 50, _order: "desc", _sort: "" }).then(data => console.log(`student:`, data))
+  //   // studentAPI.getByUserName({ name: "Ryan" }).then(dat => console.log(dat)).catch(err => console.log(err))
+  // }, [])
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <Counter />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <span>
-          <span>Learn </span>
-          <a
-            className="App-link"
-            href="https://reactjs.org/"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            React
-          </a>
-          <span>, </span>
-          <a
-            className="App-link"
-            href="https://redux.js.org/"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Redux
-          </a>
-          <span>, </span>
-          <a
-            className="App-link"
-            href="https://redux-toolkit.js.org/"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Redux Toolkit
-          </a>
-          ,<span> and </span>
-          <a
-            className="App-link"
-            href="https://react-redux.js.org/"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            React Redux
-          </a>
-        </span>
-      </header>
+    <div>
+      <Routes>
+        <Route element={<LoginPage />} path='/login'>
+
+        </Route>
+        <Route path='/admin' element={<PrivateRoute >
+          <AdminLayout />
+        </PrivateRoute>}>
+
+        </Route>
+
+        <Route path='*' element={<NotFound />}>
+
+        </Route>
+      </Routes>
     </div>
   );
 }

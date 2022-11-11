@@ -1,18 +1,21 @@
 import React from 'react';
 import { createRoot } from 'react-dom/client';
 import { Provider } from 'react-redux';
-import { store } from './app/store';
+import { routerSelector, store } from './app/store';
+import { history } from './utils';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
 import './index.css';
-
+import { ReduxRouter } from '@lagunovsky/redux-react-router'
 const container = document.getElementById('root')!;
 const root = createRoot(container);
 
 root.render(
   <React.StrictMode>
     <Provider store={store}>
-      <App />
+      <ReduxRouter history={history} routerSelector={routerSelector}>
+        <App />
+      </ReduxRouter>
     </Provider>
   </React.StrictMode>
 );
