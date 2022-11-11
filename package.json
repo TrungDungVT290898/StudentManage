@@ -6,6 +6,7 @@
     "@emotion/react": "^11.10.5",
     "@emotion/styled": "^11.10.5",
     "@lagunovsky/redux-react-router": "^4.3.0",
+    "@mui/icons-material": "^5.10.9",
     "@mui/lab": "^5.0.0-alpha.107",
     "@mui/material": "^5.10.13",
     "@reduxjs/toolkit": "^1.9.0",

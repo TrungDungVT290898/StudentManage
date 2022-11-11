@@ -18,7 +18,7 @@ function* handleLogin(info: ILoginPayLoad) {
   if (isAuthen.name) {
     localStorage.setItem("access_token", "_1236gasd");
     yield put(authActions.loginSuccess(info));
-    yield put(push("/admin"));
+    yield put(push("/admin/dashboard"));
   } else yield put(authActions.loginFail("user name or password incorrect!"));
 }
 function* handleLogout() {
