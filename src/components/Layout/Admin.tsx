@@ -6,6 +6,7 @@ import { Outlet } from 'react-router-dom';
 import { useAppDispatch, useAppSelector } from '../../app/hooks'
 import { routerSelector } from '../../app/store';
 import { authActions } from '../../features/auth/authSlice';
+import { cityActions } from '../../features/city/citySlice';
 import Header from '../Common/Header';
 import Sidebar from '../Common/Sidebar';
 
@@ -15,7 +16,7 @@ interface IAdminProps {
 const AdminLayout = (props: IAdminProps) => {
     const router = useAppSelector(routerSelector);
     const path = router.location.pathname;
-
+    const dispatch = useAppDispatch();
 
     const [selectedIndex, setSelectedIndex] = React.useState(0);
     useEffect(() => {
@@ -27,6 +28,10 @@ const AdminLayout = (props: IAdminProps) => {
             setSelectedIndex(i => i = 2);
 
     }, [path])
+    useEffect(() => {
+
+        dispatch(cityActions.fetchCities());
+    }, [dispatch])
     const handleListItemClick = (
         event: React.MouseEvent<HTMLDivElement, MouseEvent>,
         index: number,

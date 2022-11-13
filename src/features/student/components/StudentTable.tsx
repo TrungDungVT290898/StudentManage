@@ -6,17 +6,20 @@ import TableContainer from '@mui/material/TableContainer';
 import TableHead from '@mui/material/TableHead';
 import TableRow from '@mui/material/TableRow';
 import Paper from '@mui/material/Paper';
-import { Student } from '../../../models';
+import { City, Student } from '../../../models';
 import Button from "@mui/material/Button"
 import { captializeString, formatCellByMark } from '../../../utils/common';
 import { Box } from '@mui/material';
+import { useAppSelector } from '../../../app/hooks';
 type TStudentTableProps = {
     students: Student[],
+    citiesMap: { [code: string]: City }
     onEdit?: (student: Student) => void,
     onRemove?: (student: Student) => void,
 }
 
-const StudentTable = ({ students, onEdit, onRemove }: TStudentTableProps) => {
+const StudentTable = ({ students, citiesMap, onEdit, onRemove }: TStudentTableProps) => {
+
     return (
         <TableContainer component={Paper}>
             <Table sx={{ minWidth: 300 }} aria-label="simple table">
@@ -48,7 +51,7 @@ const StudentTable = ({ students, onEdit, onRemove }: TStudentTableProps) => {
                                     {student.mark}
                                 </Box>
                             </TableCell>
-                            <TableCell >{student.city}</TableCell>
+                            <TableCell >{citiesMap[student.city]?.name}</TableCell>
                             <TableCell sx={{ display: "flex", justifyContent: "space-evenly", alignItems: "center" }}>
                                 <Button variant='contained' onClick={() => onEdit?.(student)}>EDIT</Button>
                                 <Button variant='outlined' onClick={() => onRemove?.(student)} color='secondary'>REMOVE</Button>

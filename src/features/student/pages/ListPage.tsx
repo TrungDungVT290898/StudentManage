@@ -17,7 +17,9 @@ import { useNavigate } from 'react-router-dom';
 import { Skeleton } from '@mui/lab';
 import { getListParamsFromLocation } from '../../../utils/common';
 import LinearProgress from '@mui/material/LinearProgress';
+import { citiesList, selectCitiesMap } from '../../city/citySlice';
 function ListPage() {
+    // const cities = useAppSelector(citiesList);
     const dispatch = useAppDispatch();
     const router = useAppSelector(routerSelector);
     const navigate = useNavigate();
@@ -25,6 +27,7 @@ function ListPage() {
     const pagination = useAppSelector(selectStudentsPagination);
     const filter = useAppSelector(selectStudentsFilter);
     const loading = useAppSelector(selectStudentsLoading);
+    const citiMap = useAppSelector(selectCitiesMap);
     const handleChangePage = (event: React.ChangeEvent<unknown>, value: number) => {
         dispatch(studentActions.setFilter({ ...filter, _page: value }));
         navigate(`${router.location.pathname}?_page=${value}`)
@@ -52,7 +55,7 @@ function ListPage() {
 
                 <Divider />
                 <CardContent>
-                    <StudentTable students={students} />
+                    <StudentTable students={students} citiesMap={citiMap} />
                 </CardContent>
                 <CardActions sx={{ display: "flex", justifyContent: "center", alignItems: "center", position: "relative", bottom: 10 }}>
                     <PaginationComp _page={pagination._page} _totalPage={Math.ceil(pagination._totalRows / pagination._limit)} handleChangePage={handleChangePage} />

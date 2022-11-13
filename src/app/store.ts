@@ -18,6 +18,7 @@ import {
 import { history } from "../utils";
 import dashboardReducer from "../features/dashboard/dashboardSlice";
 import studentReducer from "../features/student/studenSlice";
+import citySlice from "../features/city/citySlice";
 
 const routerMiddleware = createRouterMiddleware(history);
 const sagaMiddleware = createSagaMiddleware();
@@ -28,6 +29,7 @@ export const store = configureStore({
     dashboard: dashboardReducer,
     navigator: createRouterReducer(history),
     student: studentReducer,
+    city: citySlice,
   }),
 
   middleware: (getDefaultMiddleware) =>

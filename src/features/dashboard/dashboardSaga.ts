@@ -18,7 +18,6 @@ function* fetchStatistic() {
   const statisticsList = responseList.map((x) => {
     return x.pagination._totalRows;
   });
-  console.log("res from fetch statistic:", statisticsList);
   const [maleCount, femaleCount, highMarkCount, lowMarkCount] = statisticsList;
   yield put(
     dashboardActions.setStatistics({
@@ -30,7 +29,6 @@ function* fetchStatistic() {
   );
 }
 function* fetchHighestStudentList() {
-  console.log("Start fetchHighestStudentList");
   const { data }: ListResponse<Student> = yield call(studentAPI.getAll, {
     _page: 1,
     _limit: 5,
@@ -40,7 +38,6 @@ function* fetchHighestStudentList() {
   yield put(dashboardActions.setHighestStudentList(data));
 }
 function* fetchLowestStudentList() {
-  console.log("Start fetchLowestStudentList");
   const { data }: ListResponse<Student> = yield call(studentAPI.getAll, {
     _page: 1,
     _limit: 5,
