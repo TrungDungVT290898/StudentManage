@@ -1,9 +1,10 @@
 import { Button, Divider, Grid } from '@mui/material'
 import { makeStyles, styled, useTheme } from '@mui/material/styles';
 import { Box } from '@mui/system';
-import React from 'react'
+import React, { useEffect } from 'react'
 import { Outlet } from 'react-router-dom';
-import { useAppDispatch } from '../../app/hooks'
+import { useAppDispatch, useAppSelector } from '../../app/hooks'
+import { routerSelector } from '../../app/store';
 import { authActions } from '../../features/auth/authSlice';
 import Header from '../Common/Header';
 import Sidebar from '../Common/Sidebar';
@@ -12,7 +13,26 @@ interface IAdminProps {
 
 }
 const AdminLayout = (props: IAdminProps) => {
-    const dispatch = useAppDispatch();
+    const router = useAppSelector(routerSelector);
+    const path = router.location.pathname;
+
+
+    const [selectedIndex, setSelectedIndex] = React.useState(0);
+    useEffect(() => {
+        if (path.includes("dashboard"))
+            setSelectedIndex(i => i = 0);
+        else if (path.includes("student"))
+            setSelectedIndex(i => i = 1);
+        else
+            setSelectedIndex(i => i = 2);
+
+    }, [path])
+    const handleListItemClick = (
+        event: React.MouseEvent<HTMLDivElement, MouseEvent>,
+        index: number,
+    ) => {
+        // setSelectedIndex(index);
+    };
     const theme = useTheme();
     return (
         <>
@@ -22,9 +42,9 @@ const AdminLayout = (props: IAdminProps) => {
                 </Grid>
                 <Divider />
                 <Grid item xs={2} sx={{ borderRight: `1px solid ${theme.palette.divider}`, minHeight: "100vh" }}>
-                    <Sidebar />
+                    <Sidebar handleListItemClick={handleListItemClick} selectedIndex={selectedIndex} />
                 </Grid>
-                <Grid item xs={10} sx={{ padding: "2 3" }}>
+                <Grid item xs={10} sx={{ paddingLeft: 2, paddingRight: 2 }}>
                     <Outlet />
                 </Grid>
 

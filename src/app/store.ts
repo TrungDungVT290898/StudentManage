@@ -12,8 +12,12 @@ import {
   createRouterMiddleware,
   createRouterReducer,
   ReduxRouterSelector,
+  ReduxRouterState,
+  ReduxRouterProps,
 } from "@lagunovsky/redux-react-router";
 import { history } from "../utils";
+import dashboardReducer from "../features/dashboard/dashboardSlice";
+import studentReducer from "../features/student/studenSlice";
 
 const routerMiddleware = createRouterMiddleware(history);
 const sagaMiddleware = createSagaMiddleware();
@@ -21,7 +25,9 @@ export const store = configureStore({
   reducer: combineReducers({
     counter: counterReducer,
     auth: authReducer,
+    dashboard: dashboardReducer,
     navigator: createRouterReducer(history),
+    student: studentReducer,
   }),
 
   middleware: (getDefaultMiddleware) =>
@@ -37,4 +43,4 @@ export type AppThunk<ReturnType = void> = ThunkAction<
   Action<string>
 >;
 export const routerSelector: ReduxRouterSelector<RootState> = (state) =>
-  state.navigator;
+  state.navigator as ReduxRouterState;

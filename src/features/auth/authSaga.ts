@@ -9,7 +9,6 @@ import { User } from "./pages/LoginPage";
 import { push } from "@lagunovsky/redux-react-router";
 async function authenUser(info: ILoginPayLoad) {
   const data = await studentAPI.getByUserName({ name: info.username });
-  console.log("user return:", data[0]);
   return data[0];
 }
 function* handleLogin(info: ILoginPayLoad) {

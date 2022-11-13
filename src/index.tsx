@@ -7,6 +7,7 @@ import App from './App';
 import reportWebVitals from './reportWebVitals';
 import './index.css';
 import { ReduxRouter } from '@lagunovsky/redux-react-router'
+import { CssBaseline } from '@mui/material';
 const container = document.getElementById('root')!;
 const root = createRoot(container);
 
@@ -15,6 +16,7 @@ root.render(
     <Provider store={store}>
       <ReduxRouter history={history} routerSelector={routerSelector}>
         <App />
+        <CssBaseline />
       </ReduxRouter>
     </Provider>
   </React.StrictMode>
