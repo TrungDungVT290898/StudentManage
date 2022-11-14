@@ -25,7 +25,7 @@ const studentAPI = {
   },
   remove(id: string): Promise<any> {
     const url = `/students/${id}`;
-    return axiosClient.get(url);
+    return axiosClient.delete(url);
   },
 };
 

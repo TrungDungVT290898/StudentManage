@@ -27,13 +27,17 @@ const citiSlice = createSlice({
 });
 //selectors
 export const loadingCity = (state: RootState) => state.city.loading as boolean;
-export const citiesList = (state: RootState) => state.city.cities as City[];
-export const selectCitiesMap = createSelector(citiesList, (citiesList) => {
-  return citiesList.reduce((map: { [code: string]: City }, citi) => {
-    map[citi.code] = citi;
-    return map;
-  }, {});
-});
+export const selectCitiesList = (state: RootState) =>
+  state.city.cities as City[];
+export const selectCitiesMap = createSelector(
+  selectCitiesList,
+  (citiesList) => {
+    return citiesList.reduce((map: { [code: string]: City }, citi) => {
+      map[citi.code] = citi;
+      return map;
+    }, {});
+  }
+);
 //actions
 export const cityActions = citiSlice.actions;
 //reducer

@@ -12,6 +12,9 @@ export function getListParamsFromLocation(
   }
   return ret;
 }
+export const getFilterParamsOnSaga = (filter: ListParams, key: string) => {
+  return filter[key]! as string;
+};
 export const captializeString = (input: string) => {
   if (!input) return "";
   return `${input[0].toUpperCase()}${input.slice(1)}`;

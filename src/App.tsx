@@ -25,7 +25,7 @@ function App() {
           <Route index element={<ListPage />} />
           <Route path='*' element={<ListPage />} />
           <Route path='/admin/student/add' element={<AddEditPage />} />
-
+          <Route path='/admin/student/:studentId' element={<AddEditPage />} />
         </Route>
       </Route>
 
