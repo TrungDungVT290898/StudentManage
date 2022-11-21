@@ -11,7 +11,7 @@ import AddEditPage from './features/student/pages/AddEditPage';
 import ListPage from './features/student/pages/ListPage';
 function App() {
     return (
-        <Routes>
+        <Routs>
             <Route element={<LoginPage />} path="/login"></Route>
             <Route
                 path="/admin"
@@ -31,7 +31,7 @@ function App() {
             </Route>
 
             <Route path="*" element={<NotFound />}></Route>
-        </Routes>
+        </Routs>
     );
 }
 
