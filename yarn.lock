@@ -5494,7 +5494,7 @@
   "resolved" "https://registry.npmjs.org/human-signals/-/human-signals-2.1.0.tgz"
   "version" "2.1.0"
 
-"husky@^8.0.0":
+"husky@^8.0.2":
   "integrity" "sha512-Tkv80jtvbnkK3mYWxPZePGFpQ/tT3HNSs/sasF9P2YfkMezDl3ON37YN6jUUI4eTg5LcyVynlb6r4eyvOmspvg=="
   "resolved" "https://registry.npmjs.org/husky/-/husky-8.0.2.tgz"
   "version" "8.0.2"
