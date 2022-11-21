@@ -1,46 +1,45 @@
-import { createAsyncThunk, createSlice, PayloadAction } from "@reduxjs/toolkit";
-import { User } from "./pages/LoginPage";
-import { RootState } from "../../app/store";
-import studentAPI from "../../api/studentAPI";
-import { useNavigate } from "react-router-dom";
+import { createAsyncThunk, createSlice, PayloadAction } from '@reduxjs/toolkit';
+import { User } from './pages/LoginPage';
+import { RootState } from '../../app/store';
+import studentAPI from '../../api/studentAPI';
+import { useNavigate } from 'react-router-dom';
 
 export interface IAuthState {
-  isLoggedIn: boolean;
-  logging: boolean;
-  currentUser?: User;
+    isLoggedIn: boolean;
+    logging: boolean;
+    currentUser?: User;
 }
 export interface ILoginPayLoad {
-  username: string;
-  password: string;
+    username: string;
+    password: string;
 }
 const initialState: IAuthState = {
-  isLoggedIn: Boolean(localStorage.getItem("access_token")),
-  logging: false,
-  currentUser: undefined,
+    isLoggedIn: Boolean(localStorage.getItem('access_token')),
+    logging: false,
+    currentUser: undefined,
 };
 const authSlice = createSlice({
-  name: "auth",
-  initialState,
-  reducers: {
-    login(state, action: PayloadAction<ILoginPayLoad>) {
-      state.logging = true;
+    name: 'auth',
+    initialState,
+    reducers: {
+        login(state, action: PayloadAction<ILoginPayLoad>) {
+            state.logging = true;
+        },
+        loginSuccess(state, action: PayloadAction<User>) {
+            state.logging = false;
+            state.isLoggedIn = true;
+            state.currentUser = action.payload;
+        },
+        loginFail(state, action: PayloadAction<string>) {
+            state.logging = false;
+            state.isLoggedIn = false;
+            console.log(`login fail`, state.currentUser);
+        },
+        logout(state) {
+            state.isLoggedIn = false;
+            state.currentUser = undefined;
+        },
     },
-    loginSuccess(state, action: PayloadAction<User>) {
-      state.logging = false;
-      state.isLoggedIn = true;
-      state.currentUser = action.payload;
-    },
-    loginFail(state, action: PayloadAction<string>) {
-      state.logging = false;
-      state.isLoggedIn = false;
-      console.log(`login fail`, state.currentUser);
-    },
-    logout(state) {
-      state.isLoggedIn = false;
-      state.currentUser = undefined;
-    },
-  },
-  extraReducers(builder) {},
 });
 export const authActions = authSlice.actions;
 

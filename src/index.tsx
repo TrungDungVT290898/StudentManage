@@ -6,20 +6,21 @@ import { history } from './utils';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
 import './index.css';
-import { ReduxRouter } from '@lagunovsky/redux-react-router'
+import { ReduxRouter } from '@lagunovsky/redux-react-router';
 import { CssBaseline } from '@mui/material';
+import './app/multiLanguage';
 const container = document.getElementById('root')!;
 const root = createRoot(container);
 
 root.render(
-  <React.StrictMode>
-    <Provider store={store}>
-      <ReduxRouter history={history} routerSelector={routerSelector}>
-        <App />
-        <CssBaseline />
-      </ReduxRouter>
-    </Provider>
-  </React.StrictMode>
+    <React.StrictMode>
+        <Provider store={store}>
+            <ReduxRouter history={history} routerSelector={routerSelector}>
+                <App />
+                <CssBaseline />
+            </ReduxRouter>
+        </Provider>
+    </React.StrictMode>,
 );
 
 // If you want to start measuring performance in your app, pass a function

@@ -1,25 +1,18 @@
-import TextField from "@mui/material/TextField";
-import * as React from "react";
+import TextField from '@mui/material/TextField';
+import * as React from 'react';
 
-
-import { Controller, useFormContext } from "react-hook-form";
+import { Controller, useFormContext } from 'react-hook-form';
 
 export default function FTextField({ name, ...other }: any) {
-  const { control } = useFormContext();
+    const { control } = useFormContext();
 
-  return (
-    <Controller
-      name={name}
-      control={control}
-      render={({ field, fieldState: { error } }) => {
-        return (
-          <input
-            {...field}
-            error={!!error}
-            {...other}
-          />
-        );
-      }}
-    />
-  );
+    return (
+        <Controller
+            name={name}
+            control={control}
+            render={({ field, fieldState: { error } }) => {
+                return <input {...field} {...other} />;
+            }}
+        />
+    );
 }

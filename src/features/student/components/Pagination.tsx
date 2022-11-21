@@ -1,15 +1,22 @@
 import { Pagination } from '@mui/material';
-import React from 'react'
-export interface IPaginationProps {
-    _page: number,
-    _totalPage: number,
+import React from 'react';
+export interface PaginationProps {
+    _page: number;
+    _totalPage: number;
     handleChangePage: (event: React.ChangeEvent<unknown>, value: number) => void;
 }
 
-function PaginationComp({ _page, _totalPage, handleChangePage }: IPaginationProps) {
+function PaginationComp({ _page, _totalPage, handleChangePage }: PaginationProps) {
     return (
-        <Pagination count={_totalPage} color="secondary" page={_page} onChange={handleChangePage} showFirstButton showLastButton />
-    )
+        <Pagination
+            count={_totalPage}
+            color="secondary"
+            page={_page}
+            onChange={handleChangePage}
+            showFirstButton
+            showLastButton
+        />
+    );
 }
 
-export default PaginationComp
+export default PaginationComp;

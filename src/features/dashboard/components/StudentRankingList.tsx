@@ -6,10 +6,10 @@ import TableContainer from '@mui/material/TableContainer';
 import TableHead from '@mui/material/TableHead';
 import TableRow from '@mui/material/TableRow';
 import Paper from '@mui/material/Paper';
-import { Student } from '../../../models'
+import { Student } from '../../../models';
 
 export interface IStudentRankingList {
-    students: Student[]
+    students: Student[];
 }
 export default function StudentRankingList({ students }: IStudentRankingList) {
     return (
@@ -20,8 +20,6 @@ export default function StudentRankingList({ students }: IStudentRankingList) {
                         <TableCell>Name</TableCell>
                         <TableCell align="right">Mark</TableCell>
                         <TableCell align="right">Age</TableCell>
-
-
                     </TableRow>
                 </TableHead>
                 <TableBody>
@@ -35,7 +33,6 @@ export default function StudentRankingList({ students }: IStudentRankingList) {
                             </TableCell>
                             <TableCell align="right">{student.mark}</TableCell>
                             <TableCell align="right">{student.age}</TableCell>
-
                         </TableRow>
                     ))}
                 </TableBody>

@@ -1,7 +1,6 @@
-import * as React from "react";
+import * as React from 'react';
 
-
-import { Controller, useFormContext } from "react-hook-form";
+import { Controller, useFormContext } from 'react-hook-form';
 
 function FCheckbox({ name, ...other }: any) {
     const { control } = useFormContext();
@@ -10,18 +9,10 @@ function FCheckbox({ name, ...other }: any) {
             name={name}
             control={control}
             render={({ field, fieldState: { error } }) => {
-                return (
-                    <input
-                        {...field}
-                        className={other.className}
-                        error={!!error}
-                        helperText={error?.message}
-                        {...other}
-                    />
-                );
+                return <input {...field} className={other.className} {...other} />;
             }}
         />
     );
 }
 
-export default FCheckbox
+export default FCheckbox;
