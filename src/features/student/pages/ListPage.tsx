@@ -19,7 +19,7 @@ import { ListParams, Student } from '../../../models';
 import PaginationComp from '../components/Pagination';
 import { routerSelector } from '../../../app/store';
 import { push, go, replace, reduxRouterSelector } from '@lagunovsky/redux-react-router';
-import { useLocation, useNavigate } from 'react-router-dom';
+import { useLocation, useNavigate, NavLink, Link } from 'react-router-dom';
 import { Skeleton } from '@mui/lab';
 import { getListParamsFromLocation } from '../../../utils/common';
 import LinearProgress from '@mui/material/LinearProgress';
@@ -27,8 +27,6 @@ import { selectCitiesList, selectCitiesMap } from '../../city/citySlice';
 import StudentFilter from '../components/StudentFilter';
 import studentAPI from '../../../api/studentAPI';
 import { history } from '../../../utils';
-import { Link } from 'react-router-dom';
-import { NavLink } from 'react-router-dom';
 function ListPage() {
     const dispatch = useAppDispatch();
     const router = useAppSelector(routerSelector);
@@ -54,9 +52,9 @@ function ListPage() {
     const handleStudentRemove = async (student: Student) => {
         console.log(student);
         try {
-            //call api to remove student from db
+            // call api to remove student from db
             await studentAPI.remove(student.id!);
-            //keep all filters
+            // keep all filters
             dispatch(studentActions.fetchStudentList(filter));
         } catch (error) {
             console.log('error when remove student', error);

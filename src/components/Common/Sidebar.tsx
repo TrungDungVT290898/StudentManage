@@ -12,51 +12,51 @@ import SupervisedUserCircleIcon from '@mui/icons-material/SupervisedUserCircle';
 import SettingsIcon from '@mui/icons-material/Settings';
 import { NavLink } from 'react-router-dom';
 const styleNavlink = {
-    textDecoration: 'none',
-    color: 'inherit',
+  textDecoration: 'none',
+  color: 'inherit',
 };
 export interface ISidebarProps {
-    selectedIndex: number;
-    handleListItemClick: (event: React.MouseEvent<HTMLDivElement, MouseEvent>, index: number) => void;
+  selectedIndex: number;
+  handleListItemClick: (event: React.MouseEvent<HTMLDivElement, MouseEvent>, index: number) => void;
 }
 export default function Sidebar({ selectedIndex, handleListItemClick }: ISidebarProps) {
-    // const [selectedIndex, setSelectedIndex] = React.useState(0);
-    // const handleListItemClick = (
-    //     event: React.MouseEvent<HTMLDivElement, MouseEvent>,
-    //     index: number,
-    // ) => {
-    //     setSelectedIndex(index);
-    // };
+  // const [selectedIndex, setSelectedIndex] = React.useState(0);
+  // const handleListItemClick = (
+  //     event: React.MouseEvent<HTMLDivElement, MouseEvent>,
+  //     index: number,
+  // ) => {
+  //     setSelectedIndex(index);
+  // };
 
-    return (
-        <Box sx={{ width: '100%', minWidth: 100, maxWidth: 360, bgcolor: 'background.paper' }}>
-            <List component="nav" aria-label="main mailbox folders">
-                <NavLink to="/admin/dashboard" style={styleNavlink}>
-                    <ListItemButton selected={selectedIndex === 0} onClick={(event) => handleListItemClick(event, 0)}>
-                        <ListItemIcon>
-                            <DashboardIcon />
-                        </ListItemIcon>
-                        <ListItemText primary="Dashboard" />
-                    </ListItemButton>
-                </NavLink>
-                <NavLink to="/admin/student" style={styleNavlink}>
-                    <ListItemButton selected={selectedIndex === 1} onClick={(event) => handleListItemClick(event, 1)}>
-                        <ListItemIcon>
-                            <SupervisedUserCircleIcon />
-                        </ListItemIcon>
-                        <ListItemText primary="Student" />
-                    </ListItemButton>
-                </NavLink>
-                <NavLink to="/admin/setting" style={styleNavlink}>
-                    <ListItemButton selected={selectedIndex === 2} onClick={(event) => handleListItemClick(event, 2)}>
-                        <ListItemIcon>
-                            <SettingsIcon />
-                        </ListItemIcon>
-                        <ListItemText primary="Settings" />
-                    </ListItemButton>
-                </NavLink>
-            </List>
-            <Divider />
-        </Box>
-    );
+  return (
+    <Box sx={{ width: '100%', minWidth: 100, maxWidth: 360, bgcolor: 'background.paper' }}>
+      <List component="nav" aria-label="main mailbox folders">
+        <NavLink to="/admin/dashboard" style={styleNavlink}>
+          <ListItemButton selected={selectedIndex === 0} onClick={event => handleListItemClick(event, 0)}>
+            <ListItemIcon>
+              <DashboardIcon />
+            </ListItemIcon>
+            <ListItemText primary="Dashboard" />
+          </ListItemButton>
+        </NavLink>
+        <NavLink to="/admin/student" style={styleNavlink}>
+          <ListItemButton selected={selectedIndex === 1} onClick={event => handleListItemClick(event, 1)}>
+            <ListItemIcon>
+              <SupervisedUserCircleIcon />
+            </ListItemIcon>
+            <ListItemText primary="Student" />
+          </ListItemButton>
+        </NavLink>
+        <NavLink to="/admin/setting" style={styleNavlink}>
+          <ListItemButton selected={selectedIndex === 2} onClick={event => handleListItemClick(event, 2)}>
+            <ListItemIcon>
+              <SettingsIcon />
+            </ListItemIcon>
+            <ListItemText primary="Settings" />
+          </ListItemButton>
+        </NavLink>
+      </List>
+      <Divider />
+    </Box>
+  );
 }

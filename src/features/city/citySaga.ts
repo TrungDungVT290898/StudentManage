@@ -3,16 +3,16 @@ import cityAPI from '../../api/cityAPI';
 import { City, ListResponse } from '../../models';
 import citySlice, { cityActions } from './citySlice';
 function* handleCitySaga() {
-    //fetch city
+  // fetch city
 
-    try {
-        const { data: cityList }: ListResponse<City> = yield call(cityAPI.getAll);
-        yield put(cityActions.fetchCitiesSuccess(cityList));
-    } catch (error) {
-        console.log(`error when fetch cities:`, error);
-        yield put(cityActions.fetchCitiesFail());
-    }
+  try {
+    const { data: cityList }: ListResponse<City> = yield call(cityAPI.getAll);
+    yield put(cityActions.fetchCitiesSuccess(cityList));
+  } catch (error) {
+    console.log('error when fetch cities:', error);
+    yield put(cityActions.fetchCitiesFail());
+  }
 }
 export function* citySaga() {
-    yield takeLatest(cityActions.fetchCities.type, handleCitySaga);
+  yield takeLatest(cityActions.fetchCities.type, handleCitySaga);
 }

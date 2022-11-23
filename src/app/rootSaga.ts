@@ -4,5 +4,5 @@ import { citySaga } from '../features/city/citySaga';
 import dashboardSaga from '../features/dashboard/dashboardSaga';
 import studentSaga from '../features/student/studentSaga';
 export default function* rootSaga() {
-    yield all([authSaga(), dashboardSaga(), studentSaga(), citySaga()]);
+  yield all([authSaga(), dashboardSaga(), studentSaga(), citySaga()]);
 }
