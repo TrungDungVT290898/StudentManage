@@ -1,0 +1,14 @@
+root = true
+
+[*]
+# Các thuộc tính cho mọi file
+indent_size = 4
+charset = utf-8
+trim_trailing_whitespace = true
+quote_type=single
+[*.{js,ts}]
+# Các thuộc tính cho file .js và .ts
+indent_size = 2
+indent_style = space
+max_line_length=80
+trim_trailing_whitespace=true

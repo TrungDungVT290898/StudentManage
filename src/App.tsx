@@ -1,58 +1,38 @@
-import React from 'react';
-import logo from './logo.svg';
-import { Counter } from './features/counter/Counter';
+import React, { useEffect } from 'react';
 import './App.css';
-
+import { Route, Routes } from 'react-router-dom';
+import LoginPage from './features/auth/pages/LoginPage';
+import AdminLayout from './components/layout/Admin';
+import NotFound from './components/common/NotFound';
+import PrivateRoute from './components/common/PrivateRoute';
+import Dashboard from './features/dashboard';
+import StudentFeature from './features/student';
+import AddEditPage from './features/student/pages/AddEditPage';
+import ListPage from './features/student/pages/ListPage';
 function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <Counter />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <span>
-          <span>Learn </span>
-          <a
-            className="App-link"
-            href="https://reactjs.org/"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            React
-          </a>
-          <span>, </span>
-          <a
-            className="App-link"
-            href="https://redux.js.org/"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Redux
-          </a>
-          <span>, </span>
-          <a
-            className="App-link"
-            href="https://redux-toolkit.js.org/"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Redux Toolkit
-          </a>
-          ,<span> and </span>
-          <a
-            className="App-link"
-            href="https://react-redux.js.org/"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            React Redux
-          </a>
-        </span>
-      </header>
-    </div>
-  );
+    return (
+        <Route>
+            <Route element={<LoginPage />} path="/login"></Route>
+            <Route
+                path="/admin"
+                element={
+                    <PrivateRoute>
+                        <AdminLayout />
+                    </PrivateRoute>
+                }
+            >
+                <Route path="/admin/dashboard" element={<Dashboard />}></Route>
+                <Route path="/admin/student" element={<StudentFeature />}>
+                    <Route index element={<ListPage />} />
+                    <Route path="*" element={<ListPage />} />
+                    <Route path="/admin/student/add" element={<AddEditPage />} />
+                    <Route path="/admin/student/:studentId" element={<AddEditPage />} />
+                </Route>
+            </Route>
+
+            <Route path="*" element={<NotFound />}></Route>
+        </Route>
+    );
 }
 
 export default App;
