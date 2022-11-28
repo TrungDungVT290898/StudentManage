@@ -1,29 +1,20 @@
-import { callbackify } from 'util';
 import { AuthActions } from '../contexts/AuthContext';
 import { User } from '../models';
 
 const useAuthActions: AuthActions = {
-  onLogin: async (data: User, callbackfn: () => void) => {
+  onLogin: async (data: User, callbackfn?: () => void) => {
     window.localStorage.setItem('_tokenKey', '12312sdjgaiusd');
     window.localStorage.setItem('username', data.name);
     window.localStorage.setItem('password', data.password);
-    new Promise((resolve) =>
-      setTimeout(() => {
-        callbackfn();
-      }, 1000),
-    );
+    await Promise.resolve(setTimeout(() => console.log(''), 1000)).then((s) => callbackfn?.());
   },
 
-  onLogout: async (callbackfn: () => void) => {
+  onLogout: async (callbackfn?: () => void) => {
     window.localStorage.removeItem('_tokenKey');
     window.localStorage.removeItem('username');
     window.localStorage.removeItem('password');
 
-    new Promise((resolve) =>
-      setTimeout(() => {
-        callbackfn();
-      }, 1000),
-    );
+    await Promise.resolve(setTimeout(() => console.log(''), 1000)).then((s) => callbackfn?.());
   },
 };
 export default useAuthActions;

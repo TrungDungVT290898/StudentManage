@@ -15,7 +15,7 @@ const TLoginPage = () => {
     const onSubmit: SubmitHandler<User> = async (data) => {
         await loGin(data);
     };
-    const { handleSubmit, register } = methods;
+    const { handleSubmit } = methods;
     return (
         <div className=' bg-slate-900 grid place-content-center min-h-screen '>
             <FormProvider methods={methods} onSubmit={handleSubmit(onSubmit)} className=' grid grid-flow-row-dense grid-cols-2 grid-rows-3 place-content-center'>
@@ -26,7 +26,7 @@ const TLoginPage = () => {
                     </div>
                     <div className=' col-span-2 '>
                         <label className='cols-span-1 text-gray-100' htmlFor='username'>Password</label>
-                        <input name='password' type="password" className="cols-span-1 border-solid border-2 border-sky-500 m-5 " />
+                        <FTextField name='password' type="password" className="cols-span-1 border-solid border-2 border-sky-500 m-5 " />
                     </div>
                     <div className='grid  col-span-2 row-span-1'>
                         <button className="text-gray-100 border-double border-4 border-sky-800 m-5 hover:bg-slate-600">

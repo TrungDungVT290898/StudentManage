@@ -1,6 +1,5 @@
 import { useState } from 'react';
-import { useLocation, useNavigate } from 'react-router-dom';
-import { User } from '../models';
+import { useNavigate } from 'react-router-dom';
 
 import useAuth from './useAuth';
 

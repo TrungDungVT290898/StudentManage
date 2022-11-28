@@ -7,12 +7,12 @@ import { User } from '../models';
 export interface AuthContextState {
     user?: User,
     isLogged: boolean,
-    setLoginState?: (value: boolean) => void;
+    setLoginState?: (value: boolean, user?: User) => void;
     authActions: AuthActions
 }
 export interface AuthActions {
-    onLogin: (data: User, callbackfn: () => void) => Promise<void>,
-    onLogout: (callbackfn: () => Promise<void>) => Promise<void>
+    onLogin: (data: User, callbackfn?: () => void) => Promise<void>,
+    onLogout: (callbackfn?: () => void) => Promise<void>
 }
 export interface AuthProviderProps {
     children: JSX.Element,
@@ -31,15 +31,29 @@ const AuthContext = createContext(defaultValue);
 function AuthProvider({ children, authActions }: AuthProviderProps) {
     const [isLogged, setIsLogged] = useState<boolean>(false);
     const [user, setUser] = useState<User>();
-    const setLoginState = (value: boolean) => {
-        setIsLogged(value);
+    const setLoginState = (value: boolean, user?: User) => {
+
+        setIsLogged(s => value);
+        setUser(user);
     }
     useEffect(() => {
-        if (window.localStorage.getItem('_tokenKey')) {
-            setIsLogged(true);
-        }
+        (() => {
+            try {
+                if (window.localStorage.getItem('_tokenKey')) {
+                    setIsLogged(true);
+                }
+                else {
+                    setIsLogged(false);
+                    authActions.onLogout();
+                }
+            } catch (error) {
 
-    }, [])
+            }
+
+        })();
+
+
+    }, [authActions])
 
 
     return (

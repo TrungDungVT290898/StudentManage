@@ -10,18 +10,17 @@ import {
 import Card from '@mui/material/Card';
 import CardActions from '@mui/material/CardActions';
 import CardContent from '@mui/material/CardContent';
-import CardMedia from '@mui/material/CardMedia';
+
 import Button from '@mui/material/Button';
-import Typography from '@mui/material/Typography';
+
 import Divider from '@mui/material/Divider/Divider';
 import StudentTable from '../components/StudentTable';
 import { ListParams, Student } from '../../../models';
-import PaginationComp from '../components/Pagination';
+import PaginationComp from '../../../components/common/Pagination';
 import { routerSelector } from '../../../app/store';
-import { push, go, replace, reduxRouterSelector } from '@lagunovsky/redux-react-router';
-import { useLocation, useNavigate, NavLink, Link } from 'react-router-dom';
-import { Skeleton } from '@mui/lab';
-import { getListParamsFromLocation } from '../../../utils/common';
+
+import { useLocation, NavLink } from 'react-router-dom';
+
 import LinearProgress from '@mui/material/LinearProgress';
 import { selectCitiesList, selectCitiesMap } from '../../city/citySlice';
 import StudentFilter from '../components/StudentFilter';
@@ -37,14 +36,13 @@ function ListPage() {
     const citiMap = useAppSelector(selectCitiesMap);
     const cityList = useAppSelector(selectCitiesList);
     const location = useLocation();
-    const navigate = useNavigate();
     const onChangeFilter = (newFilters: ListParams) => {
         dispatch(studentActions.setFilter(newFilters));
     };
     const onSearchChangeFilter = (newFilters: ListParams) => {
         dispatch(studentActions.setFilterDebounce(newFilters));
     };
-    const handleChangePage = (event: React.ChangeEvent<unknown>, value: number) => {
+    const handleChangePage = (value: number) => {
         dispatch(studentActions.setFilter({ ...filter, _page: value }));
 
         //
@@ -61,7 +59,6 @@ function ListPage() {
         }
     };
     const handleStudentEdit = async (studentId: string) => {
-        console.log(`editting ${studentId}.......`);
         history.push(`${location.pathname}/${studentId}`);
     };
     useEffect(() => {

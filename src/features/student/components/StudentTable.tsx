@@ -12,7 +12,7 @@ import { captializeString, formatCellByMark } from '../../../utils/common';
 import { Box } from '@mui/material';
 import { useTranslation } from 'react-i18next';
 import AlertDialog from './Dialog';
-import Portal from '../../../components/common/Portal';
+
 type TStudentTableProps = {
   students: Student[];
   citiesMap: { [code: string]: City };
@@ -21,7 +21,7 @@ type TStudentTableProps = {
 };
 
 const StudentTable = ({ students, citiesMap, onEdit, onRemove }: TStudentTableProps) => {
-  const { t, i18n } = useTranslation();
+  const { t } = useTranslation();
   const [openRemoveDialog, setOpenRemoveDialog] = React.useState(false);
   const [selectedStudent, setSelectedSutudent] = React.useState<Student>();
   const handleRemoveClick = (student: Student) => {

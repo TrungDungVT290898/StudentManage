@@ -1,4 +1,3 @@
-import { push } from '@lagunovsky/redux-react-router';
 import { PayloadAction } from '@reduxjs/toolkit';
 import { takeLatest, call, put, debounce } from 'redux-saga/effects';
 import studentAPI from '../../api/studentAPI';

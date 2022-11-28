@@ -1,7 +1,7 @@
-import { all, put, call, takeLatest } from 'redux-saga/effects';
+import { put, call, takeLatest } from 'redux-saga/effects';
 import cityAPI from '../../api/cityAPI';
 import { City, ListResponse } from '../../models';
-import citySlice, { cityActions } from './citySlice';
+import { cityActions } from './citySlice';
 function* handleCitySaga() {
   // fetch city
 

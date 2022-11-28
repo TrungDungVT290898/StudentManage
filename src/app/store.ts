@@ -7,7 +7,6 @@ import {
   createRouterReducer,
   ReduxRouterSelector,
   ReduxRouterState,
-  ReduxRouterProps,
 } from '@lagunovsky/redux-react-router';
 import { history } from '../utils';
 import dashboardReducer from '../features/dashboard/dashboardSlice';

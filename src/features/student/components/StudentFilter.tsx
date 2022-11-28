@@ -1,13 +1,14 @@
 import React from 'react';
 import { City, ListParams } from '../../../models';
-import { Grid, IconButton, OutlinedInput, TextField, Button, FormControl } from '@mui/material';
+import { Grid, Button, FormControl, TextField } from '@mui/material';
 import Box from '@mui/material/Box';
 
 import InputLabel from '@mui/material/InputLabel';
 import MenuItem from '@mui/material/MenuItem';
-import Select, { SelectChangeEvent } from '@mui/material/Select';
+import Select from '@mui/material/Select';
 import InputAdornment from '@mui/material/InputAdornment';
 import SearchIcon from '@mui/icons-material/Search';
+
 export interface IStudentFilterProps {
   filter?: ListParams;
   onChange: (newFilters: ListParams) => void;

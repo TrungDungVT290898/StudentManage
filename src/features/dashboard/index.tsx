@@ -1,6 +1,5 @@
 import React, { useEffect } from 'react';
-import Box from '@mui/material/Box';
-import Button from '@mui/material/Button';
+
 import Grid from '@mui/material/Grid';
 import StatisticItem from './components/StatisticItem';
 import FaceIcon from '@mui/icons-material/Face';
@@ -9,7 +8,7 @@ import StarBorderIcon from '@mui/icons-material/StarBorder';
 import ThumbDownOffAltIcon from '@mui/icons-material/ThumbDownOffAlt';
 import Widget from './components/Widget';
 import Stack from '@mui/material/Stack/Stack';
-import Typography from '@mui/material/Typography';
+
 import StudentRankingList from './components/StudentRankingList';
 import { useAppDispatch, useAppSelector } from '../../app/hooks';
 import {
@@ -20,7 +19,6 @@ import {
   selectLowestStudentList,
   selectRankingByCity,
 } from './dashboardSlice';
-import { Skeleton } from '@mui/material';
 import LinearProgress from '@mui/material/LinearProgress';
 function Dashboard() {
   const loading = useAppSelector(selectDashboardLoading);

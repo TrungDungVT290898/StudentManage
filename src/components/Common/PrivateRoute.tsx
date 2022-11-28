@@ -14,6 +14,7 @@ function PrivateRoute({ children }: PrivateRouteProps) {
   const location = useLocation();
   const { isLogged } = useAuth();
   if (!isLogged) {
+    console.log('not logged');
     return <Navigate to="/login" state={{ from: location }} />;
   }
   return children;

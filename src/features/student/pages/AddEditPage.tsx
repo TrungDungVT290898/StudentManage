@@ -1,5 +1,5 @@
 import { Box, Typography } from '@mui/material';
-import React, { useState, useEffect } from 'react';
+import React, { useEffect } from 'react';
 import { Link, useParams } from 'react-router-dom';
 import ArrowBackIcon from '@mui/icons-material/ArrowBack';
 import { Student } from '../../../models';
@@ -8,13 +8,13 @@ import studentAPI from '../../../api/studentAPI';
 function AddEditPage() {
   const { studentId } = useParams<{ studentId: string }>();
   const isEdit = Boolean(studentId);
-  const [student, setStudent] = useState<Student>();
+
   useEffect(() => {
     if (!studentId) return;
     (async () => {
       try {
         const res: Student = await studentAPI.getById(studentId);
-        setStudent(s => (s = res));
+
         console.log('found student:', res);
       } catch (error) {
         console.log(`Failed to get student detail,studentId: ${studentId}`, error);

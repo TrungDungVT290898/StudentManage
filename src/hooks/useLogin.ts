@@ -16,13 +16,12 @@ function useLogin(): LoginHookProps {
   const from = location.state?.from?.pathname || '/admin';
   const navigate = useNavigate();
   const [isAuthenticating, setIsAuthenticating] = useState(false);
+
   const loGin = async (data: User) => {
-    console.log('Logging....');
     setIsAuthenticating(true);
     await onLogin(data, async () => {
-      console.log('Start navigate...');
       setIsAuthenticating(false);
-      setLoginState?.(true);
+      setLoginState?.(true, data);
       navigate(from);
     });
   };

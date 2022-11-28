@@ -9,8 +9,7 @@ import InputBase from '@mui/material/InputBase';
 import MenuIcon from '@mui/icons-material/Menu';
 import SearchIcon from '@mui/icons-material/Search';
 import Button from '@mui/material/Button';
-import { useNavigate } from 'react-router-dom';
-import useAuth from '../../hooks/useAuth';
+
 import useLogout from '../../hooks/useLogout';
 const Search = styled('div')(({ theme }) => ({
   position: 'relative',

@@ -1,4 +1,3 @@
-import React from 'react';
 import { ListParams, ListResponse, Student } from '../models';
 import axiosClient from './axiosClient';
 
