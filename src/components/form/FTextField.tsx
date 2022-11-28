@@ -1,9 +1,11 @@
-import TextField from '@mui/material/TextField';
 import * as React from 'react';
 
 import { Controller, useFormContext } from 'react-hook-form';
-
-export default function FTextField({ name, ...other }: any) {
+export interface TextFieldProps {
+  name: string,
+  [key: string]: any
+}
+export default function FTextField({ name, ...other }: TextFieldProps) {
   const { control } = useFormContext();
 
   return (

@@ -12,6 +12,7 @@ import { captializeString, formatCellByMark } from '../../../utils/common';
 import { Box } from '@mui/material';
 import { useTranslation } from 'react-i18next';
 import AlertDialog from './Dialog';
+import Portal from '../../../components/common/Portal';
 type TStudentTableProps = {
   students: Student[];
   citiesMap: { [code: string]: City };
@@ -79,9 +80,8 @@ const StudentTable = ({ students, citiesMap, onEdit, onRemove }: TStudentTablePr
         </Table>
       </TableContainer>
       <AlertDialog
-        content={`Are you sure want to remove student ${selectedStudent?.name},all ${
-          selectedStudent?.gender === 'male' ? 'his' : 'her'
-        } informations will be 
+        content={`Are you sure want to remove student ${selectedStudent?.name},all ${selectedStudent?.gender === 'male' ? 'his' : 'her'
+          } informations will be
                 delete permantly`}
         title="Confirm"
         noText="Cancel"
@@ -89,6 +89,7 @@ const StudentTable = ({ students, citiesMap, onEdit, onRemove }: TStudentTablePr
         isOpen={openRemoveDialog}
         confirmOption={handleRemoveDialogClose}
       />
+
     </>
   );
 };

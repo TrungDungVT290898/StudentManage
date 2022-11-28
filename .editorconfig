@@ -3,10 +3,12 @@ root = true
 [*]
 # Các thuộc tính cho mọi file
 charset = utf-8
+end_of_line = lf
 trim_trailing_whitespace = true
 quote_type=single
 [*.{js,ts}]
 # Các thuộc tính cho file .js và .ts
 indent_style = space
 max_line_length=80
+insert_final_newline = "LF"
 trim_trailing_whitespace=true

@@ -1,14 +1,13 @@
-import React, { useEffect } from 'react';
-import { Navigate, RouteProps, Route, useLocation } from 'react-router-dom';
-import { useAppDispatch, useAppSelector } from '../../app/hooks';
-import { RootState } from '../../app/store';
-import authReducer, { selectAuthState, selectLoggIn } from '../../features/auth/authSlice';
+import React from 'react';
+import { Navigate, useLocation } from 'react-router-dom';
+
+
 import useAuth from '../../hooks/useAuth';
-type IPrivateRouteProps = {
+type PrivateRouteProps = {
   children: JSX.Element;
 };
 
-function PrivateRoute({ children }: IPrivateRouteProps) {
+function PrivateRoute({ children }: PrivateRouteProps) {
   // check if user is logged in
   // if yes, show route
   // otherwise,redirect login page

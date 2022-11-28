@@ -5,3 +5,7 @@
     @apply font-barlow;
   }
 }
+.root-portal {
+  z-index: 999;
+  position: relative;
+}

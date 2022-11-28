@@ -10,7 +10,7 @@ import StudentFeature from './features/student';
 import AddEditPage from './features/student/pages/AddEditPage';
 import ListPage from './features/student/pages/ListPage';
 import TLoginPage from './features/auth/pages/TLoginPage';
-import LoginPage from './features/auth/pages/LoginPage';
+
 function App() {
     return (
         <>

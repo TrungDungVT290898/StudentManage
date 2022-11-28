@@ -9,10 +9,9 @@ import InputBase from '@mui/material/InputBase';
 import MenuIcon from '@mui/icons-material/Menu';
 import SearchIcon from '@mui/icons-material/Search';
 import Button from '@mui/material/Button';
-import { useAppDispatch } from '../../app/hooks';
-import { authActions } from '../../features/auth/authSlice';
-import useAuth from '../../hooks/useAuth';
 import { useNavigate } from 'react-router-dom';
+import useAuth from '../../hooks/useAuth';
+import useLogout from '../../hooks/useLogout';
 const Search = styled('div')(({ theme }) => ({
   position: 'relative',
   borderRadius: theme.shape.borderRadius,
@@ -56,10 +55,9 @@ const StyledInputBase = styled(InputBase)(({ theme }) => ({
 }));
 
 export default function Header() {
-  const { onLogout } = useAuth();
-  const navigate = useNavigate();
+  const { logOut } = useLogout();
   const handleLogOut = () => {
-    onLogout?.(() => navigate('/login'));
+    logOut();
   }
   return (
     <Box sx={{ flexGrow: 1 }}>

@@ -1,11 +1,10 @@
-import { Button, Divider, Grid } from '@mui/material';
-import { makeStyles, styled, useTheme } from '@mui/material/styles';
-import { Box } from '@mui/system';
+import { Divider, Grid } from '@mui/material';
+import { useTheme } from '@mui/material/styles';
 import React, { useEffect } from 'react';
 import { Outlet } from 'react-router-dom';
 import { useAppDispatch, useAppSelector } from '../../app/hooks';
 import { routerSelector } from '../../app/store';
-import { authActions } from '../../features/auth/authSlice';
+
 import { cityActions } from '../../features/city/citySlice';
 import Header from '../common/Header';
 import Sidebar from '../common/Sidebar';

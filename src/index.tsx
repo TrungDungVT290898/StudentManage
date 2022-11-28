@@ -7,13 +7,13 @@ import App from './App';
 import './index.css';
 import { ReduxRouter } from '@lagunovsky/redux-react-router';
 import './app/multiLanguage';
-import { AuthProvider } from './contexts/AuthHook';
+import { AuthProvider } from './contexts/AuthContext';
+import useAuthActions from './hooks/useAuthActions';
 const container = document.getElementById('root')!;
 const root = createRoot(container);
-
 root.render(
     <React.StrictMode>
-        <AuthProvider>
+        <AuthProvider authActions={useAuthActions}>
             <Provider store={store}>
                 <ReduxRouter history={history} routerSelector={routerSelector}>
                     <App />
