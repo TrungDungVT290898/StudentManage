@@ -1,22 +1,23 @@
-import { useState } from 'react';
+import { useAppSelector } from '../app/hooks';
 
-export interface PaginationProps {
-  _totalPage: number;
-  handleChangePage: (page: number) => void;
-}
-function usePagination({ _totalPage, handleChangePage }: PaginationProps) {
-  const [currentPage, setCurrentPage] = useState<number>(1);
+import { selectStudentsPagination } from '../features/student/studentSlice';
+import useUpdateParams from './useUpdateParams';
+
+function usePagination() {
+  const studentPagination = useAppSelector(selectStudentsPagination);
+  const { updatePageParam } = useUpdateParams();
+  const totalPage = Math.ceil(studentPagination._totalRows / studentPagination._limit);
   const gotoPage = (value: number) => {
-    if (currentPage !== value) {
+    if (studentPagination._page !== value) {
       if (value < 1) value = 1;
-      else if (value > _totalPage) value = _totalPage;
-      setCurrentPage((p) => value);
-      handleChangePage(value);
+      else if (value > totalPage) value = totalPage;
+
+      updatePageParam(value);
     }
 
     //
   };
-  return { currentPage, totalPage: _totalPage, gotoPage };
+  return { currentPage: studentPagination._page, totalPage, gotoPage };
 }
 
 export default usePagination;

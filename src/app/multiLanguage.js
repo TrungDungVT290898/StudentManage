@@ -24,6 +24,7 @@ const resources = {
       Mark: 'Điểm',
       City: 'Thành phố',
       Actions: 'Thao tác',
+      ID: 'Mã',
     },
   },
 };

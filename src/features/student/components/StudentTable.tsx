@@ -12,15 +12,15 @@ import { captializeString, formatCellByMark } from '../../../utils/common';
 import { Box } from '@mui/material';
 import { useTranslation } from 'react-i18next';
 import AlertDialog from './Dialog';
-
-type TStudentTableProps = {
+import Portal from '../../../components/common/Portal';
+type StudentTableProps = {
   students: Student[];
   citiesMap: { [code: string]: City };
   onEdit?: (student: string) => void;
   onRemove?: (student: Student) => void;
 };
 
-const StudentTable = ({ students, citiesMap, onEdit, onRemove }: TStudentTableProps) => {
+const StudentTable = ({ students, citiesMap, onEdit, onRemove }: StudentTableProps) => {
   const { t } = useTranslation();
   const [openRemoveDialog, setOpenRemoveDialog] = React.useState(false);
   const [selectedStudent, setSelectedSutudent] = React.useState<Student>();
@@ -79,17 +79,21 @@ const StudentTable = ({ students, citiesMap, onEdit, onRemove }: TStudentTablePr
           </TableBody>
         </Table>
       </TableContainer>
-      <AlertDialog
-        content={`Are you sure want to remove student ${selectedStudent?.name},all ${selectedStudent?.gender === 'male' ? 'his' : 'her'
-          } informations will be
+      <div className='fixed z-999' id='root-portal'>
+        <Portal>
+          {openRemoveDialog ? <AlertDialog
+            content={`Are you sure want to remove student ${selectedStudent?.name},all ${selectedStudent?.gender === 'male' ? 'his' : 'her'
+              } informations will be
                 delete permantly`}
-        title="Confirm"
-        noText="Cancel"
-        yesText="Remove"
-        isOpen={openRemoveDialog}
-        confirmOption={handleRemoveDialogClose}
-      />
+            title="Confirm"
+            noText="Cancel"
+            yesText="Remove"
+            isOpen={openRemoveDialog}
+            confirmOption={handleRemoveDialogClose}
+          /> : null}
 
+        </Portal>
+      </div>
     </>
   );
 };

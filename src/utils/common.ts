@@ -1,12 +1,20 @@
 import { ListParams } from '../models';
 
-export function getListParamsFromLocation(query: string[]): ListParams | undefined {
-  if (!query || query.length <= 0) return undefined;
-  let ret: ListParams = {};
+export function getListParamsFromLocation(query: string[]): ListParams {
+  if (!query || query.length <= 0) return { _page: 1, _limit: 15 };
+  let ret: ListParams = { _page: 1, _limit: 15 };
   for (let i = 0; i < query.length; i++) {
-    if (query[i].includes('_page')) {
-      ret = { ...ret, _page: parseInt(query[i].split('=')[1]) };
-    }
+    const pair = query[i].split('=');
+    if (pair[0] === '' || !pair[0]) continue;
+    ret = { ...ret, [pair[0]]: pair[1] };
+  }
+  return ret;
+}
+export function getSearchStringFromListParams(query: ListParams): string {
+  let ret = '';
+  for (const x in query) {
+    if (x === '') continue;
+    ret += `&${x}=${query[x]}`;
   }
   return ret;
 }

@@ -1,4 +1,4 @@
-import React, { createContext, useState, useEffect } from 'react'
+import React, { createContext, useState } from 'react'
 
 import useAuthActions from '../hooks/useAuthActions';
 import { User } from '../models';
@@ -29,31 +29,32 @@ const defaultValue: AuthContextState = {
 const AuthContext = createContext(defaultValue);
 
 function AuthProvider({ children, authActions }: AuthProviderProps) {
-    const [isLogged, setIsLogged] = useState<boolean>(false);
+    const [isLogged, setIsLogged] = useState<boolean>(() => !!window.localStorage.getItem('_tokenKey'));
     const [user, setUser] = useState<User>();
     const setLoginState = (value: boolean, user?: User) => {
 
         setIsLogged(s => value);
         setUser(user);
     }
-    useEffect(() => {
-        (() => {
-            try {
-                if (window.localStorage.getItem('_tokenKey')) {
-                    setIsLogged(true);
-                }
-                else {
-                    setIsLogged(false);
-                    authActions.onLogout();
-                }
-            } catch (error) {
+    // useEffect(() => {
+    //     (() => {
+    //         try {
+    //             if (window.localStorage.getItem('_tokenKey')) {
+    //                 console.log('Logged...');
+    //                 setIsLogged(s => true);
+    //             }
+    //             else {
+    //                 setIsLogged(s => false);
+    //                 authActions.onLogout();
+    //             }
+    //         } catch (error) {
 
-            }
+    //         }
 
-        })();
+    //     })();
 
 
-    }, [authActions])
+    // }, [authActions])
 
 
     return (

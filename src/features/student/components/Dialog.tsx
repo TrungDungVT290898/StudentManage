@@ -5,7 +5,7 @@ import DialogActions from '@mui/material/DialogActions';
 import DialogContent from '@mui/material/DialogContent';
 import DialogContentText from '@mui/material/DialogContentText';
 import DialogTitle from '@mui/material/DialogTitle';
-export interface IDialogProps {
+export interface DialogProps {
   title: string;
   noText: string;
   yesText: string;
@@ -13,7 +13,7 @@ export interface IDialogProps {
   content: string;
   confirmOption: (option: 'y' | 'n' | '') => void;
 }
-export default function AlertDialog({ title, content, noText, yesText, isOpen, confirmOption }: IDialogProps) {
+export default function AlertDialog({ title, content, noText, yesText, isOpen, confirmOption }: DialogProps) {
   return (
     <div>
       <Dialog

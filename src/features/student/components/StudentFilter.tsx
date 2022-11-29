@@ -1,31 +1,26 @@
 import React from 'react';
 import { City, ListParams } from '../../../models';
-import { Grid, Button, FormControl, TextField } from '@mui/material';
+import { Grid, Button, TextField } from '@mui/material';
 import Box from '@mui/material/Box';
 
-import InputLabel from '@mui/material/InputLabel';
-import MenuItem from '@mui/material/MenuItem';
-import Select from '@mui/material/Select';
+
+
+
 import InputAdornment from '@mui/material/InputAdornment';
 import SearchIcon from '@mui/icons-material/Search';
 
-export interface IStudentFilterProps {
+export interface StudentFilterProps {
   filter?: ListParams;
   onChange: (newFilters: ListParams) => void;
-  onSearchChange: (newFilters: ListParams) => void;
+  onSearchChange: (value: string) => void;
   cityList: City[];
 }
 
-function StudentFilter({ filter, onChange, onSearchChange, cityList }: IStudentFilterProps) {
-  console.log('sort and order:', filter ? `${filter.sort}.${filter?._order}` : '');
-  const handleChange = (value: string) => {
+function StudentFilter({ filter, onChange, onSearchChange, cityList }: StudentFilterProps) {
+  const handleSearchKeywordChange = (value: string) => {
     if (!onSearchChange) return;
-    const newFilter = {
-      ...filter,
-      name_like: value,
-      _page: 1,
-    };
-    onSearchChange(newFilter);
+
+    onSearchChange(value);
   };
   const handleFilterChange = (value: string) => {
     if (!onChange) return;
@@ -62,7 +57,7 @@ function StudentFilter({ filter, onChange, onSearchChange, cityList }: IStudentF
       <Grid container spacing={3} sx={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
         <Grid item xs={12} md={6} lg={3}>
           <TextField
-            onChange={e => handleChange(e.target.value)}
+            onChange={e => handleSearchKeywordChange(e.target.value)}
             label={'Search Keyword'}
             margin="normal"
             defaultValue={filter?.['name_like']}
@@ -76,50 +71,47 @@ function StudentFilter({ filter, onChange, onSearchChange, cityList }: IStudentF
           />
         </Grid>
         <Grid item xs={12} md={6} lg={3}>
-          <FormControl fullWidth>
-            <InputLabel id="demo-simple-select-label">Filter</InputLabel>
-            <Select
-              labelId="demo-simple-select-autowidth-label"
+          <div >
+            <h4 className='text-slate-400 text-sm'>Filter By City</h4>
+            <select
               id="filter"
-              fullWidth
               value={filter?.['city'] || ''}
-              color="info"
-              label="Filter"
+              className='border-purple-600 border-2 rounded-lg min-w-full min-h-full  border-solid'
               onChange={e => handleFilterChange(e.target.value)}
             >
-              <MenuItem value="">
+              <option value=''>
                 <em>All</em>
-              </MenuItem>
+              </option>
               {cityList.map(city => (
-                <MenuItem key={`cityFilter_${city.code}`} value={city.code}>
+                <option key={`cityFilter_${city.code}`} value={city.code}>
                   {city.name}
-                </MenuItem>
+                </option>
               ))}
-            </Select>
-          </FormControl>
+            </select>
+          </div>
+
+
         </Grid>
         <Grid item xs={12} md={6} lg={3}>
-          <FormControl fullWidth>
-            <InputLabel id="sortbyLabel">Sort by</InputLabel>
-            <Select
-              labelId="sortbySelectlabel"
+          <div>
+            <h1 className='text-slate-400 text-sm'>Filter By Name,Mark</h1>
+            <select
+
               id="sortby"
-              fullWidth
+              className='border-purple-600 border-2 rounded-lg min-w-full  border-solid'
               value={filter ? `${filter._sort}.${filter?._order}` : ''}
-              color="info"
-              label="Sort by"
               onChange={e => handleSortChange(e.target.value)}
             >
-              <MenuItem value="">
+              <option value=''>
                 <em>No sort</em>
-              </MenuItem>
+              </option>
 
-              <MenuItem value="name.asc">Name ASC</MenuItem>
-              <MenuItem value="name.desc">Name DSC</MenuItem>
-              <MenuItem value="mark.asc">Mark ASC</MenuItem>
-              <MenuItem value="mark.desc">Mark DSC</MenuItem>
-            </Select>
-          </FormControl>
+              <option value="name.asc">Name ASC</option>
+              <option value="name.desc">Name DSC</option>
+              <option value="mark.asc">Mark ASC</option>
+              <option value="mark.desc">Mark DSC</option>
+            </select>
+          </div>
         </Grid>
         <Grid item xs={12} md={6} lg={3}>
           <Button variant="outlined" color="primary" fullWidth onClick={() => handleClearFilter()}>

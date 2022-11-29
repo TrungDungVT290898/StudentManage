@@ -1,10 +1,9 @@
-import React, { useEffect } from 'react';
+import React from 'react';
 import { useAppDispatch, useAppSelector } from '../../../app/hooks';
 import {
     selectStudentsFilter,
     selectStudentsList,
     selectStudentsLoading,
-    selectStudentsPagination,
     studentActions,
 } from '../studentSlice';
 import Card from '@mui/material/Card';
@@ -17,38 +16,43 @@ import Divider from '@mui/material/Divider/Divider';
 import StudentTable from '../components/StudentTable';
 import { ListParams, Student } from '../../../models';
 import PaginationComp from '../../../components/common/Pagination';
-import { routerSelector } from '../../../app/store';
 
 import { useLocation, NavLink } from 'react-router-dom';
-
 import LinearProgress from '@mui/material/LinearProgress';
 import { selectCitiesList, selectCitiesMap } from '../../city/citySlice';
 import StudentFilter from '../components/StudentFilter';
 import studentAPI from '../../../api/studentAPI';
 import { history } from '../../../utils';
-function ListPage() {
+import usePagination from '../../../hooks/usePagination';
+// import { getSearchStringFromListParams } from '../../../utils/common';
+import useSearch from '../../../hooks/useSearch';
+import useRenderOnURLChange from '../../../hooks/useRenderOnURLChange';
+import useUpdateParams from '../../../hooks/useUpdateParams';
+
+
+
+
+function MainPage() {
+
     const dispatch = useAppDispatch();
-    const router = useAppSelector(routerSelector);
-    const students = useAppSelector(selectStudentsList);
-    const pagination = useAppSelector(selectStudentsPagination);
-    const filter = useAppSelector(selectStudentsFilter);
     const loading = useAppSelector(selectStudentsLoading);
-    const citiMap = useAppSelector(selectCitiesMap);
+    const cityMap = useAppSelector(selectCitiesMap);
     const cityList = useAppSelector(selectCitiesList);
     const location = useLocation();
+    const students = useAppSelector(selectStudentsList);
+    useRenderOnURLChange();
+    const filter = useAppSelector(selectStudentsFilter);
+    const { setSearchValue } = useSearch();
+    const { updateCustomParams } = useUpdateParams();
+    const pagination = usePagination();
     const onChangeFilter = (newFilters: ListParams) => {
-        dispatch(studentActions.setFilter(newFilters));
+        updateCustomParams(newFilters);
     };
-    const onSearchChangeFilter = (newFilters: ListParams) => {
-        dispatch(studentActions.setFilterDebounce(newFilters));
-    };
-    const handleChangePage = (value: number) => {
-        dispatch(studentActions.setFilter({ ...filter, _page: value }));
 
-        //
+    const onSearchChangeFilter = (value: string) => {
+        setSearchValue(value);
     };
     const handleStudentRemove = async (student: Student) => {
-        console.log(student);
         try {
             // call api to remove student from db
             await studentAPI.remove(student.id!);
@@ -61,27 +65,6 @@ function ListPage() {
     const handleStudentEdit = async (studentId: string) => {
         history.push(`${location.pathname}/${studentId}`);
     };
-    useEffect(() => {
-        dispatch(studentActions.fetchStudentList(filter));
-        let newURL = `${router.location.pathname}?`;
-        if (filter._page) {
-            newURL += `&_page=${filter._page!}`;
-        }
-        if (filter._order) {
-            newURL += `&_order=${filter._order!}`;
-        }
-        if (filter._sort) {
-            newURL += `&_sort=${filter._sort!}`;
-        }
-        if (filter._limit) {
-            newURL += `&_limit=${filter._limit!}`;
-        }
-
-        if (filter['city']) {
-            newURL += `&city=${filter['city']!}`;
-        }
-        history.push(newURL);
-    }, [dispatch, filter]);
 
     return (
         <>
@@ -110,7 +93,7 @@ function ListPage() {
                     <CardContent>
                         <StudentTable
                             students={students}
-                            citiesMap={citiMap}
+                            citiesMap={cityMap}
                             onEdit={handleStudentEdit}
                             onRemove={handleStudentRemove}
                         />
@@ -125,15 +108,17 @@ function ListPage() {
                         }}
                     >
                         <PaginationComp
-                            _page={pagination?._page}
-                            _totalPage={Math.ceil(pagination?._totalRows / pagination?._limit)}
-                            handleChangePage={handleChangePage}
+                            _page={pagination.currentPage}
+                            _totalPage={pagination.totalPage}
+                            handleChangePage={pagination.gotoPage}
                         />
                     </CardActions>
+
+
                 </Card>
             )}
         </>
     );
 }
 
-export default ListPage;
+export default MainPage;

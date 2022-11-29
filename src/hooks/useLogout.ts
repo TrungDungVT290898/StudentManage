@@ -5,7 +5,7 @@ import useAuth from './useAuth';
 
 type LoginHookProps = {
   logOut: () => Promise<void>;
-  isAuthenticating: boolean;
+  isLoggingOut: boolean;
 };
 
 function useLogout(): LoginHookProps {
@@ -13,17 +13,17 @@ function useLogout(): LoginHookProps {
   const { onLogout } = authActions;
 
   const navigate = useNavigate();
-  const [isAuthenticating, setIsAuthenticating] = useState(false);
+  const [isLoggingOut, setIsLoggingOut] = useState(false);
   const logOut = async () => {
     console.log('Logging out....');
-    setIsAuthenticating(true);
+    setIsLoggingOut(true);
     await onLogout(async () => {
-      setIsAuthenticating(false);
+      setIsLoggingOut(false);
       setLoginState?.(false);
       navigate('/login');
     });
   };
-  return { isAuthenticating, logOut };
+  return { isLoggingOut, logOut };
 }
 
 export default useLogout;

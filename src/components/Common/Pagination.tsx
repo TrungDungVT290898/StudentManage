@@ -1,4 +1,5 @@
 
+
 import React from 'react';
 export interface PaginationProps {
     _page: number;
@@ -12,24 +13,13 @@ function PaginationComp({ _page, _totalPage, handleChangePage }: PaginationProps
             <ul className='flex flex-row justify-center min-w-fit bg-slate-200 rounded-lg'>
                 {
                     new Array(_totalPage).fill(1).map((p, idx) => (
-
-                        idx === _page - 1 ?
-                            (<li className='rounded-full bg-slate-400 hover:cursor-pointer m-2 w-5 text-center' onClick={(e) => handleChangePage(idx + 1)}>{idx + 1}</li>) :
-                            (<li className='rounded-full bg-slate-700 hover:cursor-pointer hover:bg-slate-500 m-2 w-5 text-center' onClick={(e) => handleChangePage(idx + 1)}>{idx + 1}</li>)
+                        <li key={`list_pagination_${idx}`} className={`rounded-full  hover:cursor-pointer m-2 w-5 text-center ${idx === _page - 1 ? 'bg-slate-400' : 'bg-slate-600'}`} onClick={(e) => handleChangePage(idx + 1)}>{idx + 1}</li>
 
                     ))
 
                 }
 
             </ul>
-            {/* <Pagination
-                count={_totalPage}
-                color="secondary"
-                page={_page}
-                onChange={handleChangePage}
-                showFirstButton
-                showLastButton
-            /> */}
         </>
 
     );

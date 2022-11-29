@@ -8,7 +8,7 @@ import PrivateRoute from './components/common/PrivateRoute';
 import Dashboard from './features/dashboard';
 import StudentFeature from './features/student';
 import AddEditPage from './features/student/pages/AddEditPage';
-import ListPage from './features/student/pages/ListPage';
+import MainPage from './features/student/pages/MainPage';
 import TLoginPage from './features/auth/pages/TLoginPage';
 
 function App() {
@@ -25,12 +25,12 @@ function App() {
                         </PrivateRoute>
                     }
                 >
-                    <Route path="/admin/dashboard" element={<Dashboard />}></Route>
-                    <Route path="/admin/student" element={<StudentFeature />}>
-                        <Route index element={<ListPage />} />
-                        <Route path="*" element={<ListPage />} />
-                        <Route path="/admin/student/add" element={<AddEditPage />} />
-                        <Route path="/admin/student/:studentId" element={<AddEditPage />} />
+                    <Route path="dashboard" element={<Dashboard />}></Route>
+                    <Route path="student" element={<StudentFeature />}>
+                        <Route index element={<MainPage />} />
+                        <Route path="*" element={<MainPage />} />
+                        <Route path="add" element={<AddEditPage />} />
+                        <Route path=":studentId" element={<AddEditPage />} />
                     </Route>
                 </Route>
 

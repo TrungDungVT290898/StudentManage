@@ -1,19 +1,13 @@
-import { PropsWithChildren, useEffect, useState, useRef } from 'react';
+import { useEffect, useState, useRef } from 'react';
 import { createPortal } from 'react-dom';
 
-export interface IPortal {
+export interface PortalProps {
     selector?: string;
     children: JSX.Element | null
 }
 
-const Portal = (props: PropsWithChildren<IPortal>) => {
+const Portal = ({ selector = '#root-portal', children }: PortalProps) => {
 
-    props = {
-        selector: 'root-portal',
-        ...props
-    };
-
-    const { selector, children } = props;
     const ref = useRef<Element>()
     const [mounted, setMounted] = useState(false);
 
@@ -32,7 +26,7 @@ const Portal = (props: PropsWithChildren<IPortal>) => {
 
         setMounted(true);
 
-    }, [selector]);
+    }, [selector, selectorPrefixed]);
 
     return mounted ? createPortal(children, ref.current!) : null;
 
