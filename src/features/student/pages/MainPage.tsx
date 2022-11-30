@@ -5,6 +5,7 @@ import {
     selectStudentsList,
     selectStudentsLoading,
     studentActions,
+
 } from '../studentSlice';
 import Card from '@mui/material/Card';
 import CardActions from '@mui/material/CardActions';
@@ -21,7 +22,6 @@ import { useLocation, NavLink } from 'react-router-dom';
 import LinearProgress from '@mui/material/LinearProgress';
 import { selectCitiesList, selectCitiesMap } from '../../city/citySlice';
 import StudentFilter from '../components/StudentFilter';
-import studentAPI from '../../../api/studentAPI';
 import { history } from '../../../utils';
 import usePagination from '../../../hooks/usePagination';
 // import { getSearchStringFromListParams } from '../../../utils/common';
@@ -29,19 +29,20 @@ import useSearch from '../../../hooks/useSearch';
 import useRenderOnURLChange from '../../../hooks/useRenderOnURLChange';
 import useUpdateParams from '../../../hooks/useUpdateParams';
 
+import studentAPI from '../../../api/studentAPI';
+
 
 
 
 function MainPage() {
-
     const dispatch = useAppDispatch();
     const loading = useAppSelector(selectStudentsLoading);
     const cityMap = useAppSelector(selectCitiesMap);
     const cityList = useAppSelector(selectCitiesList);
     const location = useLocation();
     const students = useAppSelector(selectStudentsList);
-    useRenderOnURLChange();
     const filter = useAppSelector(selectStudentsFilter);
+    useRenderOnURLChange();
     const { setSearchValue } = useSearch();
     const { updateCustomParams } = useUpdateParams();
     const pagination = usePagination();
@@ -67,7 +68,7 @@ function MainPage() {
     };
 
     return (
-        <>
+        <React.Fragment>
             {loading ? (
                 <LinearProgress color="secondary" />
             ) : (
@@ -117,7 +118,7 @@ function MainPage() {
 
                 </Card>
             )}
-        </>
+        </React.Fragment>
     );
 }
 

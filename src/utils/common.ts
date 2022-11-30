@@ -6,7 +6,7 @@ export function getListParamsFromLocation(query: string[]): ListParams {
   for (let i = 0; i < query.length; i++) {
     const pair = query[i].split('=');
     if (pair[0] === '' || !pair[0]) continue;
-    ret = { ...ret, [pair[0]]: pair[1] };
+    ret = { ...ret, [pair[0]]: pair[1].replace('+', ' ') };
   }
   return ret;
 }

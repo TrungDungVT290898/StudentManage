@@ -60,7 +60,7 @@ function StudentFilter({ filter, onChange, onSearchChange, cityList }: StudentFi
             onChange={e => handleSearchKeywordChange(e.target.value)}
             label={'Search Keyword'}
             margin="normal"
-            defaultValue={filter?.['name_like']}
+            defaultValue={(filter?.['name_like'] as string) ? filter?.['name_like'].replace('+', ' ') : ''}
             InputProps={{
               endAdornment: (
                 <InputAdornment position="end">
@@ -77,12 +77,12 @@ function StudentFilter({ filter, onChange, onSearchChange, cityList }: StudentFi
               id="filter"
               value={filter?.['city'] || ''}
               className='border-purple-600 border-2 rounded-lg min-w-full min-h-full  border-solid'
-              onChange={e => handleFilterChange(e.target.value)}
+              onChange={e => { e.preventDefault(); handleFilterChange(e.target.value); }}
             >
               <option value=''>
                 <em>All</em>
               </option>
-              {cityList.map(city => (
+              {cityList?.map(city => (
                 <option key={`cityFilter_${city.code}`} value={city.code}>
                   {city.name}
                 </option>

@@ -10,6 +10,7 @@ function useSearch() {
   const [previousSearch, setPreviousSearch] = useState(debounceValue);
   const { updateSearchParam } = useUpdateParams();
   useEffect(() => {
+    console.log('check input debounce...');
     if (previousSearch === debounceValue) return;
     setPreviousSearch(debounceValue);
     if (debounceValue && debounceValue.length > 0) {
@@ -18,7 +19,7 @@ function useSearch() {
       params.delete('name_like');
       setParams(params);
     }
-  }, [debounceValue, params, previousSearch, setParams, updateSearchParam]);
+  }, [debounceValue]);
 
   return { setSearchValue, searchQuery: debounceValue };
 }
